@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Card, Icon, Label, Dropdown } from 'semantic-ui-react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { Card, Icon, Label, Dropdown, Button } from 'semantic-ui-react';
 import { useSelector, useDispatch } from 'react-redux';
 import useForm from '../hooks/useForm';
 import '../styles/styles.css'
@@ -8,17 +8,14 @@ import { updatePost, upvotePost } from '../redux/actions/post';
 
 const Post = ({posts}) => {
     const userState = useSelector(state => state.user.auth);
-    const likedPosts = useSelector(state => state.user.auth.likedPosts);
-    const [uposts, setPosts] = useState([]);
-
     const {deletePost, setPostInState, likePost} = useForm();
-
-    const addPost = post => {
-        uposts.push(post._id);
+    const [active, setActive] = useState(false);
+    
+    const reRender = post => {
+        setActive(true);
         likePost(post);
     }
-    
-    
+
     const postToBeRendered = posts && posts.map((post, i) => {
         const tags = post.tags && post.tags.slice(0, 3).map((tag, i) => <Label id="tag" key={i}><Icon name="tag">  {tag} </Icon></Label>)
             return(
@@ -39,7 +36,12 @@ const Post = ({posts}) => {
                             <Dropdown.Item icon='bomb' text='Delete' onClick={() => deletePost(post)}/>
                         </Dropdown.Menu>
                         </Dropdown>
-                    :null}
+                    : 
+                    <Button icon labelPosition='left'>
+                        <Icon name='user' />
+                        Follow {post.user.username}
+                    </Button>
+                    }
                 
                 </Card.Header>
                 <Card.Meta>
@@ -53,17 +55,13 @@ const Post = ({posts}) => {
                 {tags}
                 </Card.Content>
                 <Card.Content extra id="tags">
-                {/* {userState.likedPosts && userState.likedPosts.includes(post._id) ? */}
-                {uposts.includes(post._id) ?
-                    <>
-                    <button onClick={() => console.log(userState)}>This has been liked</button>
-                    </>
-                :
-                    <>
-                    <button onClick={() => likePost(post)}>{post.likes}</button>
-                    <button onClick={() => addPost(post)}>SetPost</button>
-                    <button onClick={() => console.log(userState.likedPosts)}>Log State</button>
-                    </>
+                {userState.likedPosts && userState.likedPosts.includes(post._id) 
+                ?
+                    <Button disabled>{post.likes}</Button>
+
+                :  
+                    <Button disabled={active} onClick={() => reRender(post)}>{post.likes}</Button>
+
                 }
                 </Card.Content>
         

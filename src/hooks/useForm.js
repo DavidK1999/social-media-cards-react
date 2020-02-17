@@ -40,8 +40,8 @@ const useForm = () => {
     }
 
     const likePost = post => {
-        dispatch(updateUser(post));
         dispatch(upvotePost(post));
+        dispatch(updateUser(post));
     }
 
     const createTags = e => {

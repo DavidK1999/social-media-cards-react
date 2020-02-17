@@ -26,7 +26,6 @@ export const registerUser = value => {
             const parsedResponse = await response.json();
             if(parsedResponse.status.code === 200) {
                 dispatch({type: 'REGISTER', value: parsedResponse.data});
-                console.log(getState().user.auth);
             }
         } catch (error) {
             console.log('error');
@@ -61,9 +60,11 @@ export const updateUser = value => {
                 headers: {'Content-Type' : 'application/json'}
             });
             const parsedResponse = await response.json();
-            console.log(parsedResponse);
+            console.log(parsedResponse.data);
             if(parsedResponse.status.code === 200) {
-                dispatch({type: 'UPDATE', value: parsedResponse.data});
+                dispatch({type: 'LIKEPOST', value: parsedResponse.data});
+                console.log(getState().user.auth.likedPosts);
+
             }
         } catch (error) {
             console.log('error', error);

@@ -21,7 +21,7 @@ const PostContainer = () => {
 
     return (
         <div className="post-container">
-            <Post posts={posts}/>
+            <Post posts={posts} user={userState}/>
         </div>
     );
 }

@@ -26,8 +26,10 @@ export default function User(state = initialState, action) {
             }
         case 'LOGOUT':
             return {...state, loggedIn: state.logged = false, auth: state.auth = {}}
-        case 'UPDATE':
-            return {...state, auth: state.auth = action.value}
+        case 'LIKEPOST':
+            return {
+                ...state, auth: state.auth = {...action.value}
+            }
         default:
             return state
     }
