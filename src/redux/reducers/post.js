@@ -18,9 +18,14 @@ export default function Post(state=initialState, action) {
                 ...state, action: state.action = '',
             }
         case PostTypes.UPDATE:
-            return {...state, post: state.post = {...action.value}}
+            return {
+                ...state, post: state.post = {...action.value},
+                }
         case PostTypes.READ:
-            return {...state, posts: state.posts = [...state.posts, action.value]}
+            return {
+                    ...state, posts: state.posts = [...state.posts, action.value],
+                    ...state, action: state.action = ''
+                    }
         case PostTypes.REMOVE:
             return {...state, posts: state.posts.filter((post) => post._id !== action.value._id)}
         default:
