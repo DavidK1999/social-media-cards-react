@@ -7,6 +7,7 @@ import Post from './Post';
 const PostContainer = () => {
     const [posts, setPosts] = useState([]);
     const postState = useSelector(state => state.post.posts);
+    const userState = useSelector(state => state.user.auth);
     
     useEffect(() => {
         const getPosts = async () => {

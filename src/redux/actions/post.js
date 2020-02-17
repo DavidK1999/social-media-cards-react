@@ -76,6 +76,31 @@ export const updatePost = value => {
     }
 }
 
+export const upvotePost = upvoted => {
+    return async (dispatch, getState) => {
+        try {
+            const postResponse = await fetch(`http://localhost:8000/post/update/${upvoted._id}`, {
+                method: 'PATCH',
+                body: JSON.stringify(upvoted),
+                headers: {'Content-Type' : 'application/json'}
+            });
+
+            const updatedPostResponseParsed = await postResponse.json();
+            const updatedPosts = getState().post.posts.map((post => {
+                if (post._id === updatedPostResponseParsed.data._id) {
+                    post = updatedPostResponseParsed.data
+                }
+                return post
+            }));
+            if(updatedPostResponseParsed.status.code === 200) {
+                dispatch({type: 'READ', value: updatedPosts});
+            }
+        } catch (error) {
+            console.log('error', error); 
+        }
+    }
+}
+
 export const removePost = value => {
     return async (dispatch, getState) => {
         try {

@@ -1,6 +1,7 @@
 export const OPEN = 'OPEN';
 export const CLOSE = 'CLOSE'
 export const MODAL = 'MODAL';
+export const UPDATE = 'UPDATE';
 
 export const LOGIN = 'LOGIN'
 export const REGISTER = 'REGISTER'

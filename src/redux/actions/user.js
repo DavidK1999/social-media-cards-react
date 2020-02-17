@@ -52,6 +52,26 @@ export const loginUser = value => {
     }
 }
 
+export const updateUser = value => {
+    return async (dispatch, getState) => {
+        try {
+            const response = await fetch(`http://localhost:8000/auth/add/${getState().user.auth._id}`, {
+                method: 'PATCH',
+                body: JSON.stringify(value),
+                headers: {'Content-Type' : 'application/json'}
+            });
+            const parsedResponse = await response.json();
+            console.log(parsedResponse);
+            if(parsedResponse.status.code === 200) {
+                dispatch({type: 'UPDATE', value: parsedResponse.data});
+            }
+        } catch (error) {
+            console.log('error', error);
+            
+        }
+    }
+}
+
 
 export const logoutUser = () => {
     return  {type: UserTypes.LOGOUT}
