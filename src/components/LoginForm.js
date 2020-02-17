@@ -1,13 +1,16 @@
 import React from 'react';
-import {Button, Form } from 'semantic-ui-react';
+import {Button, Form, Message } from 'semantic-ui-react';
 import useForm from '../hooks/useForm';
+import { useSelector } from 'react-redux';
 
 const LoginForm = () => {
     
-   const { handleInputChange, login } = useForm();
+   const { handleInputChange, login, message } = useForm();
     
     return (
+        
         <Form onSubmit={login}>
+        {message ? <Message negative >{message}</Message> : null}
             <Form.Input
             icon = "user" 
             iconPosition = "left"
@@ -34,8 +37,9 @@ const LoginForm = () => {
             placeholder='joe@schmoe.com' 
             name="password" 
             onChange={handleInputChange}
-
             />
+
+
             <Button>Login</Button>
         </Form>
     )

@@ -16,7 +16,7 @@ const PostContainer = () => {
             setPosts(parsedPosts.data);
         }
             getPosts();
-    }, [postState]);
+    }, [postState, userState]);
 
 
     return (

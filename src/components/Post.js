@@ -8,16 +8,10 @@ import { updatePost, upvotePost } from '../redux/actions/post';
 
 const Post = ({posts}) => {
     const userState = useSelector(state => state.user.auth);
-    const {deletePost, setPostInState, likePost} = useForm();
-    const [active, setActive] = useState(false);
+    const {deletePost, setPostInState, likePost, follow} = useForm();
     
-    const reRender = post => {
-        setActive(true);
-        likePost(post);
-    }
-
     const postToBeRendered = posts && posts.map((post, i) => {
-        const tags = post.tags && post.tags.slice(0, 3).map((tag, i) => <Label id="tag" key={i}><Icon name="tag">  {tag} </Icon></Label>)
+        const tags = post.tags && post.tags.map((tag, i) => <Label id="tag" key={i}><Icon name="tag">  {tag} </Icon></Label>)
             return(
                 <Card key={i} id="card">
                 <Card.Content id="card-content">
@@ -36,14 +30,23 @@ const Post = ({posts}) => {
                             <Dropdown.Item icon='bomb' text='Delete' onClick={() => deletePost(post)}/>
                         </Dropdown.Menu>
                         </Dropdown>
-                    : 
-                    <Button icon labelPosition='left'>
-                        <Icon name='user' />
-                        Follow {post.user.username}
-                    </Button>
+                    :
+                    <>
+                        {userState.followedUsers && userState.followedUsers.includes(post.user._id) 
+                        ? 
+                        <Button icon labelPosition="left">
+                            <Icon name="check"/> Following 
+                        </Button>
+                        :
+                        <Button icon labelPosition="left" onClick={() => follow(post.user)}>
+                            <Icon name="user"/> Follow
+                        </Button>
+                        }
+                    </>
                     }
-                
                 </Card.Header>
+                
+                
                 <Card.Meta>
                     <span className='date'>Posted: {post.timestamp}</span>
                 </Card.Meta>
@@ -56,11 +59,20 @@ const Post = ({posts}) => {
                 </Card.Content>
                 <Card.Content extra id="tags">
                 {userState.likedPosts && userState.likedPosts.includes(post._id) 
-                ?
-                    <Button disabled>{post.likes}</Button>
+                ? 
+                    <Button icon labelPosition='left'>
+                        <Icon name='star' id="liked" />
+                        {post.likes}
+                    </Button>
 
                 :  
-                    <Button disabled={active} onClick={() => reRender(post)}>{post.likes}</Button>
+                    <Button 
+                        icon 
+                        labelPosition='left'
+                        onClick={() => likePost(post)}>
+                        <Icon name='star' />
+                        {post.likes}
+                    </Button>
 
                 }
                 </Card.Content>

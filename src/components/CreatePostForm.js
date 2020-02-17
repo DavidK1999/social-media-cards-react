@@ -4,7 +4,7 @@ import useForm from '../hooks/useForm';
 import { useSelector } from 'react-redux';
 
 const CreatePostForm = () => {
-    const { createTags, handleInputChange, createPost } = useForm();
+    const { createTags, handleInputChange, createPost, message } = useForm();
     const posts = useSelector(state => state.post.posts);
 
     return (
@@ -33,7 +33,8 @@ const CreatePostForm = () => {
                         iconPosition = "left"
                         label='tags' 
                         placeholder='tag, it, baby,' 
-                        name="tags" 
+                        name="tags"
+                        maxLength={message ? "0" : "100"} 
                         onChange={createTags}
                         />
                         <Button>Create</Button>

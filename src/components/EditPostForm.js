@@ -1,10 +1,10 @@
 import React from 'react';
-import {Form, Button, TextArea, Card, Divider, Label } from 'semantic-ui-react';
+import {Form, Button, TextArea, Card, Divider, Label, Message } from 'semantic-ui-react';
 import useForm from '../hooks/useForm';
 import { useSelector } from 'react-redux';
 
 const EditPostForm = () => {
-    const { createTags, handleInputChange, editPost } = useForm();
+    const { createTags, handleInputChange, editPost, message } = useForm();
 
     return (
         <Card id="modal-card">
@@ -15,6 +15,7 @@ const EditPostForm = () => {
             <Divider/>
                 <Card.Description id="form-container">
                     <Form onSubmit={editPost} id="post-form">
+                        {message ? <Message negative>{message}</Message> : null}
                         <Label>Body</Label>
                         <TextArea
                         icon = "book" 
@@ -32,7 +33,8 @@ const EditPostForm = () => {
                         iconPosition = "left"
                         label='tags' 
                         placeholder='tag, it, baby,' 
-                        name="tags" 
+                        name="tags"
+                        maxLength={message ? "0" : "100"}
                         onChange={createTags}
                         />
                         <Button>Edit</Button>

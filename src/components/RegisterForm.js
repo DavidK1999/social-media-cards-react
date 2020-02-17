@@ -1,13 +1,14 @@
 import React from 'react';
-import {Button, Form } from 'semantic-ui-react';
+import {Button, Form, Message } from 'semantic-ui-react';
 import useForm from '../hooks/useForm';
 
 const RegisterForm = () => {
     
-   const { handleInputChange, register } = useForm();
+   const { handleInputChange, register, message } = useForm();
     
     return (
         <Form onSubmit={register}>
+            {message ? <Message negative>{message}</Message> : null}
             <Form.Input
             icon = "user" 
             iconPosition = "left"

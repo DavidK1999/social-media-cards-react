@@ -26,13 +26,15 @@
 
 #tags {
     display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    height: 6rem;
+    height: 20rem;
 }
 
 #tag {
-    width: auto;
+    width: 10rem;
     font-size: 1.2rem;
     margin: 2%;
 }
@@ -51,3 +53,9 @@
 #popup {
     margin-left:-40px;
 }
+
+#liked {
+    transition: color 0.8s ease;
+    color: gold;
+}
+
