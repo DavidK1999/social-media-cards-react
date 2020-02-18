@@ -16,7 +16,9 @@ const Post = () => {
                 <Card key={i} id="card">
                 <Card.Content id="card-content">
                 <Card.Header id="card-header">
-                    <Icon name="user" id="card-user-icon"> <strong>{post.user.username}</strong></Icon>
+                    <Button icon labelPosition="left" id="user-post-label">
+                            <Icon name="user"/> {post.user.username} 
+                    </Button>
                     {post.user._id === userState._id ?
                         <Dropdown
                         icon='cog'
@@ -34,11 +36,11 @@ const Post = () => {
                     <>
                         {userState.followedUsers && userState.followedUsers.includes(post.user._id) 
                         ? 
-                        <Button icon labelPosition="left">
+                        <Button icon labelPosition="left" animated='fade'>
                             <Icon name="check"/> Following 
                         </Button>
                         :
-                        <Button icon labelPosition="left" onClick={() => follow(post.user)}>
+                        <Button icon labelPosition="left" onClick={() => follow(post.user)} animated='fade'>
                             <Icon name="user plus"/> Follow
                         </Button>
                         }

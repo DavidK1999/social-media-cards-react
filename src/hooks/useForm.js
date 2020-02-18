@@ -55,16 +55,22 @@ const useForm = () => {
         dispatch(findTaggedPosts(tag));
     }
 
+    const resetMessage = () => {
+        setTimeout(() => {
+            dispatch({type: 'MESSAGE', value: null});
+        }, 1500);
+    }
+
     const createTags = e => {
         let modifiedText = e.currentTarget.value.replace(/\s/g, '')
             let tags = modifiedText.split(",");
             for(let tag of tags) {
                 if(tag.length > 10) {
-                    return dispatch({type: 'MESSAGE', value: 'Max of ten characters per tag'});
+                    return dispatch({type: 'MESSAGE', value: 'Max of ten characters per tag'}, resetMessage());
                 }
             }
             if(tags.length > 10) {
-                dispatch({type: 'MESSAGE', value: 'Max of ten tags'})
+                dispatch({type: 'MESSAGE', value: 'Max of ten tags'}, resetMessage());
             } else {
                 dispatch({type: 'MESSAGE', value: null});
             }

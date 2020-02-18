@@ -2,6 +2,7 @@ import React from 'react';
 import {useDispatch, useSelector } from 'react-redux';
 import { Menu, Dropdown } from 'semantic-ui-react'
 import * as UserActionCreators from '../redux/actions/user';
+import '../styles/styles.css';
 
 const UserMenu = () => {
     const user = useSelector(state => state.user.auth);
@@ -9,8 +10,18 @@ const UserMenu = () => {
     const dispatch = useDispatch();
     return (
         <Menu pointing secondary id="menu">
+
+            <Menu.Menu position="left">
+                <Menu.Item 
+                name='Community Cards'
+                icon="copy"
+                />
+                
+            </Menu.Menu>
             
             <Menu.Menu position='right' id="user-menu">
+
+            
             {!loggedStatus ?
                 <>
                     <Menu.Item 
@@ -27,6 +38,12 @@ const UserMenu = () => {
                 </>
                 :
                 <>
+
+                    <Menu.Item 
+                    name='Home'
+                    icon="home"
+                    />
+                    
                     <Menu.Item
                     icon="book"
                     name='post'
@@ -41,6 +58,7 @@ const UserMenu = () => {
                     labeled
                     button
                     className='icon'
+                    id="user-dropdown"
                     >   
                 
                         <Dropdown.Menu>

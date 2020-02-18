@@ -1,7 +1,8 @@
 import React from 'react';
-import {Form, Button, TextArea, Card, Divider, Label } from 'semantic-ui-react';
+import {Form, Button, TextArea, Card, Divider, Label, Message } from 'semantic-ui-react';
 import useForm from '../hooks/useForm';
 import { useSelector } from 'react-redux';
+import '../styles/styles.css';
 
 const CreatePostForm = () => {
     const { createTags, handleInputChange, createPost, message } = useForm();
@@ -16,6 +17,9 @@ const CreatePostForm = () => {
             <Divider/>
                 <Card.Description id="form-container">
                     <Form onSubmit={createPost} id="post-form">
+                    <div className="message">
+                        {message ? <Message negative>{message}</Message> : null}
+                    </div>
                         <Label>Body</Label>
                         <TextArea
                         icon = "book" 
@@ -38,7 +42,6 @@ const CreatePostForm = () => {
                         onChange={createTags}
                         />
                         <Button>Create</Button>
-                        <button onClick={() => console.log(posts)}>Click me boi</button>
 
                     </Form>
                 </Card.Description>

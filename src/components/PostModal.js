@@ -21,7 +21,6 @@ const PostModal = () => {
             <Modal.Content id="user-form-container">
             {posting === 'create' ?  <CreatePostForm/> : <EditPostForm/>}
             <Modal.Content id="user-form-container">
-                <button onClick={() => console.log(posting)}>action</button>
             </Modal.Content>
             </Modal.Content>
         </Modal>
