@@ -1,13 +1,19 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useDispatch, useSelector } from 'react-redux';
 import { Menu, Dropdown } from 'semantic-ui-react'
+import { getUserPosts, getPosts } from '../redux/actions/post';
 import * as UserActionCreators from '../redux/actions/user';
 import '../styles/styles.css';
 
 const UserMenu = () => {
-    const user = useSelector(state => state.user.auth);
+    const user = useSelector(state => state.user.auth._id);
     const loggedStatus = useSelector(state => state.user.loggedIn);
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getUserPosts());
+    }, [dispatch]);
+
     return (
         <Menu pointing secondary id="menu">
 
@@ -64,7 +70,7 @@ const UserMenu = () => {
                         <Dropdown.Menu>
                             <Dropdown.Header icon='cog' content='Options' />
                             <Dropdown.Divider />
-                            <Dropdown.Item icon='sticky note' text='My Posts' />
+                            <Dropdown.Item icon='sticky note' text='My Posts' onClick={() => dispatch(getUserPosts(user))}/>
                             <Dropdown.Item icon='users' text='People I Follow' />
                             <Dropdown.Item 
                             icon='sign-out' 

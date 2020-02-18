@@ -24,13 +24,26 @@ export const getPosts = () => {
         try {
             const response = await fetch(`http://localhost:8000/post/retrieve`);
             const parsedResponse = await response.json();
-            console.log(parsedResponse.data);
             if(parsedResponse.status.code === 200) {
                 dispatch({type: 'READ', value: parsedResponse.data});
-                console.log(getState().post.posts);
             }
         } catch (error) {
             console.log('error');
+        }
+    }
+}
+
+export const getUserPosts = user => {
+    return async (dispatch, getState) => {
+        try {
+            const response = await fetch(`http://localhost:8000/post/retrieve/${getState().user.auth._id}`);
+            const parsedResponse = await response.json();
+            console.log(parsedResponse.data);
+            if(parsedResponse.status.code === 200) {
+                dispatch({type: 'FILTERUSER', value: user});
+            }
+        } catch (error) {
+            console.log('error', error);
         }
     }
 }

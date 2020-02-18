@@ -12,7 +12,7 @@ const PostContainer = () => {
     
     useEffect(() => {
         dispatch(getPosts());
-    }, [dispatch, userState]);
+    }, [dispatch]);
 
 
     return (

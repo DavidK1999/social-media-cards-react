@@ -29,9 +29,13 @@ export default function Post(state=initialState, action) {
         case PostTypes.REMOVE:
             return {...state, posts: state.posts.filter((post) => post._id !== action.value._id)}
         case PostTypes.FILTER:
-            console.log(state.posts);
             return {
                 ...state, posts: state.posts.filter((post) => post.tags.includes(action.value))
+            }
+        case PostTypes.FILTERUSER:
+            console.log(state.posts);
+            return {
+                ...state, posts: state.posts.filter((post) => post.user._id === action.value.user)
             }
         default:
             return state;

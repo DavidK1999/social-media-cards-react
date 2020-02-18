@@ -27,6 +27,7 @@ export const registerUser = value => {
             if(parsedResponse.status.code === 200) {
                 dispatch({type: 'REGISTER', value: parsedResponse.data});
                 dispatch({type: 'MESSAGE', value: parsedResponse.status.message});
+                setTimeout(() => {dispatch({type: 'MESSAGE', value: null}, 100)});
             }  else {
                 dispatch({type: 'MESSAGE', value: parsedResponse.status.message});
             }
