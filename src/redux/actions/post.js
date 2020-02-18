@@ -24,8 +24,10 @@ export const getPosts = () => {
         try {
             const response = await fetch(`http://localhost:8000/post/retrieve`);
             const parsedResponse = await response.json();
+            console.log(parsedResponse.data);
             if(parsedResponse.status.code === 200) {
                 dispatch({type: 'READ', value: parsedResponse.data});
+                console.log(getState().post.posts);
             }
         } catch (error) {
             console.log('error');
@@ -42,6 +44,7 @@ export const makePost = value => {
                 headers: {'Content-Type' : 'application/json'}
             });
             const parsedResponse = await response.json();
+            console.log(parsedResponse);
             if(parsedResponse.status.code === 200) {
                 dispatch({type: 'CREATE', value: parsedResponse.data});
             }
@@ -110,6 +113,21 @@ export const removePost = value => {
             const parsedResponse = await response.json();
             if(parsedResponse.status.code === 200) {
                 dispatch({type: 'REMOVE', value: parsedResponse.data});
+            }
+        } catch (error) {
+            console.log('error', error);
+        }
+    }
+} 
+
+export const findTaggedPosts = value => {
+    console.log(value);
+    return async (dispatch, getState) => {
+        try {
+            const response = await fetch(`http://localhost:8000/post/tags/${value}`);
+            const parsedResponse = await response.json();
+            if(parsedResponse.status.code === 200) {
+                dispatch({type: 'FILTER', value: value});
             }
         } catch (error) {
             console.log('error', error);

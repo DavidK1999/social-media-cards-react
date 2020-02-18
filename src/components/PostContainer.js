@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-
+import { useSelector, useDispatch } from 'react-redux';
+import {getPosts } from '../redux/actions/post';
 import Post from './Post';
 
 
@@ -8,15 +8,11 @@ const PostContainer = () => {
     const [posts, setPosts] = useState([]);
     const postState = useSelector(state => state.post.posts);
     const userState = useSelector(state => state.user.auth);
+    const dispatch = useDispatch();
     
     useEffect(() => {
-        const getPosts = async () => {
-            const posts = await fetch(`http://localhost:8000/post/retrieve`);
-            const parsedPosts = await posts.json();
-            setPosts(parsedPosts.data);
-        }
-            getPosts();
-    }, [postState, userState]);
+        dispatch(getPosts());
+    }, [dispatch, userState]);
 
 
     return (

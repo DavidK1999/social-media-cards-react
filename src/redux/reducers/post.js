@@ -23,11 +23,16 @@ export default function Post(state=initialState, action) {
                 }
         case PostTypes.READ:
             return {
-                    ...state, posts: state.posts = [...state.posts, action.value],
+                    ...state, posts: state.posts = action.value,
                     ...state, action: state.action = ''
                     }
         case PostTypes.REMOVE:
             return {...state, posts: state.posts.filter((post) => post._id !== action.value._id)}
+        case PostTypes.FILTER:
+            console.log(state.posts);
+            return {
+                ...state, posts: state.posts.filter((post) => post.tags.includes(action.value))
+            }
         default:
             return state;
     }

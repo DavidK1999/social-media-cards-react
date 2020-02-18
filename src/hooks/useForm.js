@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import { loginUser, registerUser, updateUser, followUser} from '../redux/actions/user';
-import { makePost, removePost, updatePost, upvotePost } from '../redux/actions/post';
+import { makePost, removePost, updatePost, upvotePost, findTaggedPosts } from '../redux/actions/post';
 import { useDispatch, useSelector } from 'react-redux';
 
 
@@ -51,6 +51,10 @@ const useForm = () => {
         dispatch(updateUser(post));
     }
 
+    const findTagged = tag => {
+        dispatch(findTaggedPosts(tag));
+    }
+
     const createTags = e => {
         let modifiedText = e.currentTarget.value.replace(/\s/g, '')
             let tags = modifiedText.split(",");
@@ -75,7 +79,7 @@ const useForm = () => {
     return { register, login, handleInputChange, 
              inputs,   createPost, createTags, 
             deletePost, setPostInState, editPost,
-            likePost, message, follow
+            likePost, message, follow, findTagged
         }
 }
 

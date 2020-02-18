@@ -1,17 +1,17 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React  from 'react';
 import { Card, Icon, Label, Dropdown, Button } from 'semantic-ui-react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import useForm from '../hooks/useForm';
 import '../styles/styles.css'
-import { updatePost, upvotePost } from '../redux/actions/post';
 
 
-const Post = ({posts}) => {
+const Post = () => {
     const userState = useSelector(state => state.user.auth);
-    const {deletePost, setPostInState, likePost, follow} = useForm();
+    const posts = useSelector(state => state.post.posts);
+    const {deletePost, setPostInState, likePost, follow, findTagged} = useForm();
     
     const postToBeRendered = posts && posts.map((post, i) => {
-        const tags = post.tags && post.tags.map((tag, i) => <Label id="tag" key={i}><Icon name="tag">  {tag} </Icon></Label>)
+        const tags = post.tags && post.tags.map((tag, i) => <Label id="tag" key={i} onClick={()=>findTagged(tag)}><Icon name="tag">  {tag} </Icon></Label>)
             return(
                 <Card key={i} id="card">
                 <Card.Content id="card-content">
@@ -39,7 +39,7 @@ const Post = ({posts}) => {
                         </Button>
                         :
                         <Button icon labelPosition="left" onClick={() => follow(post.user)}>
-                            <Icon name="user"/> Follow
+                            <Icon name="user plus"/> Follow
                         </Button>
                         }
                     </>
