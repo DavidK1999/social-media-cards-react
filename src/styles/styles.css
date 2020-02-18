@@ -1,6 +1,13 @@
+#menu {
+    background-color: #e9e9e9;
+    margin: 0;
+}
+
+
+
 .post-container {
     width: 100%;
-    margin: 0 auto;
+    margin: 0;
 }
 
 .post {
@@ -20,7 +27,7 @@
     width: 40rem;
     height: 50rem;
     margin: 0 auto;
-
+    padding: 1rem;
 }
 
 #form-container {
@@ -28,14 +35,17 @@
 }
 
 #post-form {
-    height: 90%;
+    padding: 1%;
+    height: 95%;
     display: flex;
-    flex-direction: column;
     justify-content: space-around;
+    flex-direction: column;
 }
 
 #card {
-    width: 40rem;
+    margin: 2%;
+    width: 60rem;
+    height: 20rem;
     font-size: 1.1rem;
 }
 
@@ -90,5 +100,6 @@
 
 #user-post-label {
     background-color: white;
+    color: #6EC4DB;
 }
 

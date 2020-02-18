@@ -26,6 +26,7 @@ const LoginForm = () => {
             label='Email' 
             placeholder='joe@schmoe.com' 
             name="email"
+            type="email"
             onChange={handleInputChange}
 
             />
@@ -36,6 +37,7 @@ const LoginForm = () => {
             label='Password' 
             placeholder='joe@schmoe.com' 
             name="password" 
+            type="password"
             onChange={handleInputChange}
             />
 

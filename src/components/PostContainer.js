@@ -1,23 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import {getPosts } from '../redux/actions/post';
+import React, {useEffect} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
+import { getPosts } from '../redux/actions/post';
 import Post from './Post';
 
 
 const PostContainer = () => {
-    const [posts, setPosts] = useState([]);
+    const dispatch = useDispatch();
     const postState = useSelector(state => state.post.posts);
     const userState = useSelector(state => state.user.auth);
-    const dispatch = useDispatch();
-    
+
     useEffect(() => {
         dispatch(getPosts());
-    }, [dispatch]);
-
-
+      }, [dispatch, postState.length]);
+    
     return (
         <div className="post-container">
-            <Post posts={posts} user={userState}/>
+            <Post posts={postState} user={userState}/>
         </div>
     );
 }

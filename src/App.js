@@ -1,4 +1,5 @@
 import React from 'react';
+
 import UserMenu from './containers/UserMenu';
 import AuthenticateUser from './components/AuthModal';
 import HandlePosts from './components/PostModal';

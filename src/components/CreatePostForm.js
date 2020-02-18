@@ -20,29 +20,31 @@ const CreatePostForm = () => {
                     <div className="message">
                         {message ? <Message negative>{message}</Message> : null}
                     </div>
-                        <Label>Body</Label>
+                        <label>Body</label>
                         <TextArea
                         icon = "book" 
                         iconPosition = "left"
                         label="body"
                         placeholder="What's on your mind?" 
                         name="body"
+                        style={{minHeight: 200}}
+                        maxLength={message ? "0" : "300"} 
                         onChange={handleInputChange}
                         />
 
                         <Divider/>
-                        <Label>Tags</Label>
+                        <label>Tags</label>
                         <TextArea
                         icon="tag"
                         iconPosition = "left"
                         label='tags' 
                         placeholder='tag, it, baby,' 
                         name="tags"
-                        maxLength={message ? "0" : "100"} 
+                        style={{minHeight: 200}}
+                        maxLength={message ? "0" : "500"} 
                         onChange={createTags}
                         />
                         <Button>Create</Button>
-
                     </Form>
                 </Card.Description>
         </Card.Content>

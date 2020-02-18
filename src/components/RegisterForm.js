@@ -24,6 +24,7 @@ const RegisterForm = () => {
             label='Email' 
             placeholder='joe@schmoe.com' 
             name="email"
+            type="email"
             onChange={handleInputChange}
 
             />
@@ -33,7 +34,8 @@ const RegisterForm = () => {
             iconPosition = "left"
             label='Password' 
             placeholder='joe@schmoe.com' 
-            name="password" 
+            name="password"
+            type="password" 
             onChange={handleInputChange}
 
             />

@@ -1,13 +1,10 @@
 import React  from 'react';
 import { Card, Icon, Label, Dropdown, Button } from 'semantic-ui-react';
-import { useSelector } from 'react-redux';
 import useForm from '../hooks/useForm';
 import '../styles/styles.css'
 
 
-const Post = () => {
-    const userState = useSelector(state => state.user.auth);
-    const posts = useSelector(state => state.post.posts);
+const Post = ({posts, user}) => {
     const {deletePost, setPostInState, likePost, follow, findTagged} = useForm();
     
     const postToBeRendered = posts && posts.map((post, i) => {
@@ -19,7 +16,7 @@ const Post = () => {
                     <Button icon labelPosition="left" id="user-post-label">
                             <Icon name="user"/> {post.user.username} 
                     </Button>
-                    {post.user._id === userState._id ?
+                    {post.user._id === user._id ?
                         <Dropdown
                         icon='cog'
                         className='icon'
@@ -34,7 +31,7 @@ const Post = () => {
                         </Dropdown>
                     :
                     <>
-                        {userState.followedUsers && userState.followedUsers.includes(post.user._id) 
+                        {user.followedUsers && user.followedUsers.includes(post.user._id) 
                         ? 
                         <Button icon labelPosition="left" animated='fade'>
                             <Icon name="check"/> Following 
@@ -60,7 +57,7 @@ const Post = () => {
                 {tags}
                 </Card.Content>
                 <Card.Content extra id="tags">
-                {userState.likedPosts && userState.likedPosts.includes(post._id) 
+                {user.likedPosts && user.likedPosts.includes(post._id) 
                 ? 
                     <Button icon labelPosition='left'>
                         <Icon name='star' id="liked" />

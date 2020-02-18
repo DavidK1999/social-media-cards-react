@@ -26,11 +26,13 @@ export const registerUser = value => {
             const parsedResponse = await response.json();
             if(parsedResponse.status.code === 200) {
                 dispatch({type: 'REGISTER', value: parsedResponse.data});
-                dispatch({type: 'MESSAGE', value: parsedResponse.status.message});
-                setTimeout(() => {dispatch({type: 'MESSAGE', value: null}, 100)});
             }  else {
                 dispatch({type: 'MESSAGE', value: parsedResponse.status.message});
+                setTimeout(() => {
+                    dispatch({type: 'MESSAGE', value: null});
+                }, 1500);
             }
+            
         } catch (error) {
             console.log('error');
         }
@@ -47,11 +49,12 @@ export const loginUser = value => {
             });
             const parsedResponse = await response.json();
             if(parsedResponse.status.code === 200) {
-                dispatch({type: 'REGISTER', value: parsedResponse.data});
-                dispatch({type: 'MESSAGE', value: parsedResponse.status.message});
-                setTimeout(() => {dispatch({type: 'MESSAGE', value: null}, 100)});
+                dispatch({type: 'LOGIN', value: parsedResponse.data});
             }  else {
                 dispatch({type: 'MESSAGE', value: parsedResponse.status.message});
+                setTimeout(() => {
+                    dispatch({type: 'MESSAGE', value: null});
+                }, 1500);
             }
         } catch (error) {
             console.log('error');
