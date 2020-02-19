@@ -1,9 +1,22 @@
 #menu {
     background-color: #e9e9e9;
     margin: 0;
+    padding: 1rem;
 }
 
+#branding-menu {
+    display: flex;
+    justify-content: space-between;
+    width: 60%
+}
 
+.search {
+    width: 20rem;
+}
+
+.search .prompt {
+    width: 20rem;
+}
 
 .post-container {
     width: 100%;
@@ -102,4 +115,6 @@
     background-color: white;
     color: #6EC4DB;
 }
+
+
 
