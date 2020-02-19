@@ -83,7 +83,6 @@ export const upvotePost = upvoted => {
             });
 
             const updatedPostResponseParsed = await postResponse.json();
-            console.log(updatedPostResponseParsed);
             const updatedPosts = getState().post.posts.map((post => {
                 if (post._id === updatedPostResponseParsed.data._id) {
                     post = updatedPostResponseParsed.data
@@ -91,9 +90,6 @@ export const upvotePost = upvoted => {
                 return post
             }));
             if(updatedPostResponseParsed.status.code === 200) {
-                console.log(getState().user.auth._id);
-                console.log(upvoted);
-                console.log(updatedPosts);
                 dispatch({type: 'READ', value: updatedPosts});
             }
         } catch (error) {

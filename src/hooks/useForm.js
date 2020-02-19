@@ -5,16 +5,13 @@ import { useDispatch, useSelector } from 'react-redux';
 
 
 const useForm = () => {
-    // TODO add a callback function to dispatch an action from Auth Form
     const [inputs, setInputs] = useState({});
     const dispatch = useDispatch();
     const message = useSelector(state => state.user.message);
     
-
     const register = async e => {              
         e.preventDefault();
         dispatch(registerUser(inputs));
-
     }
 
     const follow = user => {
@@ -24,7 +21,6 @@ const useForm = () => {
     const login = e => {
         e.preventDefault();
         dispatch(loginUser(inputs));
-
     }
 
     const createPost = e => {
