@@ -1,12 +1,10 @@
 import React from 'react';
-import {Form, Button, TextArea, Card, Divider, Label, Message } from 'semantic-ui-react';
+import {Form, Button, TextArea, Card, Divider, Message } from 'semantic-ui-react';
 import useForm from '../hooks/useForm';
-import { useSelector } from 'react-redux';
 import '../styles/styles.css';
 
 const CreatePostForm = () => {
     const { createTags, handleInputChange, createPost, message } = useForm();
-    const posts = useSelector(state => state.post.posts);
 
     return (
         <Card id="modal-card">

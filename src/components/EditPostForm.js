@@ -1,7 +1,6 @@
 import React from 'react';
 import {Form, Button, TextArea, Card, Divider, Label, Message } from 'semantic-ui-react';
 import useForm from '../hooks/useForm';
-import { useSelector } from 'react-redux';
 
 const EditPostForm = () => {
     const { createTags, handleInputChange, editPost, message } = useForm();
