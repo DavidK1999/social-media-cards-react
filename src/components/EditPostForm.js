@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 const EditPostForm = () => {
     const { createTags, handleInputChange, editPost, message } = useForm();
     const currentPost = useSelector(state => state.post.post);
-    const tags = currentPost.tags.join(",");
+    const tags = currentPost.tags && currentPost.tags.join(",");
 
     return (
         <Card id="modal-card">

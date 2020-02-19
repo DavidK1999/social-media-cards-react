@@ -51,6 +51,7 @@ export const makePost = value => {
 export const updatePost = value => {
     return async (dispatch, getState) => {
         try {
+            console.log(value);
             const response = await fetch(`http://localhost:8000/post/update/${getState().post.post._id}`, {
                 method: 'PUT',
                 body: JSON.stringify(value),
@@ -58,6 +59,7 @@ export const updatePost = value => {
             });
             
             const parsedResponse = await response.json();
+            console.log(parsedResponse);
             const updatedPosts = getState().post.posts.map((post => {
                 if (post._id === parsedResponse.data._id) {
                     post = parsedResponse.data
