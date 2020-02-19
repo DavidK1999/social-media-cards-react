@@ -38,6 +38,26 @@ export const registerUser = value => {
         }
     }
 }
+export const getUsers = () => {
+    return async (dispatch, getState) => {
+        try {
+            const response = await fetch(`http://localhost:8000/auth/retrieve/${getState().user.auth._id}`);
+            const parsedResponse = await response.json();
+            console.log(parsedResponse);
+            if(parsedResponse.status.code === 200) {
+                dispatch({type: 'RETRIEVE', value: parsedResponse.data});
+            }  else {
+                dispatch({type: 'MESSAGE', value: parsedResponse.status.message});
+                setTimeout(() => {
+                    dispatch({type: 'MESSAGE', value: null});
+                }, 1500);
+            }
+            
+        } catch (error) {
+            console.log('error');
+        }
+    }
+}
 
 export const loginUser = value => {
     return async (dispatch, getState) => {
@@ -110,9 +130,9 @@ export const followUser = value => {
                 headers: {'Content-Type' : 'application/json'}
             });
             const parsedResponse = await response.json();
+            console.log(parsedResponse);
             if(parsedResponse.status.code === 200) {
                 dispatch({type: 'FOLLOW', value: parsedResponse.data});
-                console.log(getState().user.auth.likedPosts);
             }
         } catch (error) {
             console.log('error', error);

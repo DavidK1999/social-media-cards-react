@@ -7,12 +7,12 @@ const Post = ({posts, user, loggedIn}) => {
     const {deletePost, setPostInState, likePost, follow, findTagged} = useForm();
     
     const postToBeRendered = posts && posts.map((post, i) => {
-        const tags = post.tags && post.tags.map((tag, i) => <Label id="tag" key={i} onClick={()=>findTagged(tag)}><Icon name="tag">  {tag} </Icon></Label>)
+        const tags = post.tags && post.tags.map((tag, i) => <Label id="tag" key={i} onClick={()=>findTagged(tag)}><Icon name="hashtag">  {tag} </Icon></Label>)
             return(
                 <Card key={i} id="card">
                 <Card.Content id="card-content">
                 <Card.Header id="card-header">
-                    <Button icon labelPosition="left" id="user-post-label" onClick={() => console.log(user)}>
+                    <Button icon labelPosition="left" id="user-post-label">
                             <Icon name="user"/> {post.user.username} 
                     </Button>
                     {post.user._id === user._id && loggedIn ?
@@ -30,7 +30,7 @@ const Post = ({posts, user, loggedIn}) => {
                         </Dropdown>
                     :
                     <>
-                        {user.followedUsers && user.followedUsers.includes(post.user._id) 
+                        {user.followedUsers && user.followedUsers.includes(post.user.username)
                         ? 
                         <Button icon labelPosition="left">
                             <Icon name="check"/> Following 

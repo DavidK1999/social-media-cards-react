@@ -1,6 +1,7 @@
 import {useState} from 'react';
 import { loginUser, registerUser, updateUser, followUser, increment} from '../redux/actions/user';
 import { makePost, removePost, updatePost, upvotePost, findTaggedPosts } from '../redux/actions/post';
+import {useHistory} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 
@@ -8,6 +9,7 @@ const useForm = () => {
     const [inputs, setInputs] = useState({});
     const dispatch = useDispatch();
     const message = useSelector(state => state.user.message);
+    const history = useHistory();
     
     const register = async e => {              
         e.preventDefault();
@@ -49,6 +51,7 @@ const useForm = () => {
     }
 
     const findTagged = tag => {
+        history.replace(`/home/${tag}`);
         dispatch(findTaggedPosts(tag));
     }
 

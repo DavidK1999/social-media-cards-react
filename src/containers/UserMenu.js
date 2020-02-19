@@ -1,5 +1,6 @@
 import React from 'react';
 import {useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { Menu, Dropdown } from 'semantic-ui-react'
 import { getUserPosts, getPosts } from '../redux/actions/post';
 import '../styles/styles.css';
@@ -8,6 +9,7 @@ const UserMenu = () => {
     const user = useSelector(state => state.user.auth);
     const loggedStatus = useSelector(state => state.user.loggedIn);
     const dispatch = useDispatch();
+    const history = useHistory();
 
     return (
         <Menu pointing secondary id="menu">
@@ -42,8 +44,7 @@ const UserMenu = () => {
                     <Menu.Item 
                     name='Home'
                     icon="home"
-                    onClick={() => dispatch(getPosts())}
-                    />
+                    onClick={() => history.push("/home")}/>
                     
                     <Menu.Item
                     icon="book"
@@ -66,7 +67,7 @@ const UserMenu = () => {
                             <Dropdown.Header icon='cog' content='Options' />
                             <Dropdown.Divider />
                             <Dropdown.Item icon='sticky note' text='My Posts' onClick={() => dispatch(getUserPosts(user._id))}/>
-                            <Dropdown.Item icon='users' text='People I Follow' />
+                            <Dropdown.Item icon='users' text='People I Follow' onClick={() => history.push('/following')}/>
                             <Dropdown.Item 
                             icon='sign-out' 
                             text='Logout'

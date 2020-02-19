@@ -3,6 +3,7 @@ export const CLOSE = 'CLOSE'
 export const MODAL = 'MODAL';
 export const LIKEPOST = 'LIKEPOST';
 export const FOLLOW = 'FOLLOW';
+export const RETRIEVE = 'RETRIEVE';
 export const MESSAGE = 'MESSAGE';
 export const INCREMENT = 'INCREMENT';
 

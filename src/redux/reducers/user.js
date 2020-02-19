@@ -15,6 +15,9 @@ export default function User(state = initialState, action) {
 
         case 'CLOSE':
             return {...state, action: state.action = ''}
+        
+        case 'RETRIEVE':
+            return {...state, auth: state.auth = {}}
 
         case 'MESSAGE':
             return {...state, message: state.message = action.value}

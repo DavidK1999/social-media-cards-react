@@ -3,11 +3,23 @@
     margin: 0;
 }
 
-
-
 .post-container {
     width: 100%;
     margin: 0;
+}
+
+#table {
+    margin: 0;
+    width: 100%;
+    text-align: center;
+}
+
+#table th {
+    width: 100%;
+}
+
+#table td {
+    width: 5rem;
 }
 
 .post {
@@ -44,9 +56,10 @@
 
 #card {
     margin: 2%;
-    width: 60rem;
-    height: 20rem;
-    font-size: 1.1rem;
+    padding: 0.5rem;
+    width: 30rem;
+    height: 30rem;
+    font-size: 1.0rem;
 }
 
 #card-header {
@@ -54,23 +67,20 @@
     justify-content: space-between;
     align-items: center;
     height: 2.5rem;
+    margin-bottom: 1.5rem;
 }
 
 #tags {
     display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    height: 20rem;
 }
 
 #tag {
-    width: 10rem;
-    font-size: 1.2rem;
+    width: auto;
+    font-size: 0.9rem;
     margin: 2%;
 }
-
 
 #card-user-icon {
     display: flex;
@@ -100,6 +110,5 @@
 
 #user-post-label {
     background-color: white;
-    color: #6EC4DB;
 }
 
