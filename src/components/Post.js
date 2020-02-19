@@ -3,8 +3,7 @@ import { Card, Icon, Label, Dropdown, Button } from 'semantic-ui-react';
 import useForm from '../hooks/useForm';
 import '../styles/styles.css'
 
-
-const Post = ({posts, user}) => {
+const Post = ({posts, user, loggedIn}) => {
     const {deletePost, setPostInState, likePost, follow, findTagged} = useForm();
     
     const postToBeRendered = posts && posts.map((post, i) => {
@@ -13,10 +12,10 @@ const Post = ({posts, user}) => {
                 <Card key={i} id="card">
                 <Card.Content id="card-content">
                 <Card.Header id="card-header">
-                    <Button icon labelPosition="left" id="user-post-label">
+                    <Button icon labelPosition="left" id="user-post-label" onClick={() => console.log(user)}>
                             <Icon name="user"/> {post.user.username} 
                     </Button>
-                    {post.user._id === user._id ?
+                    {post.user._id === user._id && loggedIn ?
                         <Dropdown
                         icon='cog'
                         className='icon'
@@ -33,18 +32,17 @@ const Post = ({posts, user}) => {
                     <>
                         {user.followedUsers && user.followedUsers.includes(post.user._id) 
                         ? 
-                        <Button icon labelPosition="left" animated='fade'>
+                        <Button icon labelPosition="left">
                             <Icon name="check"/> Following 
                         </Button>
                         :
-                        <Button icon labelPosition="left" onClick={() => follow(post.user)} animated='fade'>
+                        <Button icon labelPosition="left" onClick={() => follow(post.user)}>
                             <Icon name="user plus"/> Follow
                         </Button>
                         }
                     </>
                     }
                 </Card.Header>
-                
                 
                 <Card.Meta>
                     <span className='date'>Posted: {post.timestamp}</span>
@@ -79,7 +77,7 @@ const Post = ({posts, user}) => {
             </Card>
             )
         });
-
+        
         return(
             <div className="post">
                 {postToBeRendered}

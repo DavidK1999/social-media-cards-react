@@ -8,14 +8,16 @@ const PostContainer = () => {
     const dispatch = useDispatch();
     const postState = useSelector(state => state.post.posts);
     const userState = useSelector(state => state.user.auth);
+    const loggedIn = useSelector(state => state.user.loggedIn);
+    const createdPosts = userState.createdPosts && userState.createdPosts;
 
     useEffect(() => {
         dispatch(getPosts());
-      }, [dispatch, postState.length]);
+      }, [dispatch, createdPosts]);
     
     return (
         <div className="post-container">
-            <Post posts={postState} user={userState}/>
+            <Post posts={postState} user={userState} loggedIn={loggedIn}/>
         </div>
     );
 }

@@ -33,9 +33,9 @@ export default function Post(state=initialState, action) {
                 ...state, posts: state.posts.filter((post) => post.tags.includes(action.value))
             }
         case PostTypes.FILTERUSER:
-            console.log(state.posts);
+            state.posts.forEach(post => console.log(post));
             return {
-                ...state, posts: state.posts.filter((post) => post.user._id === action.value.user)
+                ...state, posts: state.posts.filter((post) => post.user._id === action.value)
             }
         default:
             return state;

@@ -1,17 +1,5 @@
 import * as PostTypes from '../actiontypes/post'
 
-export const closeModal = () => {
-    return  {type: PostTypes.CLOSEPOSTMODAL}
-
-}
-
-export const openPostModal = value => {
-    return  {
-        type: PostTypes.OPENPOSTMODAL,
-        value
-    }
-}
-
 export const storePostInState = value => {
     return {
         type: PostTypes.UPDATE,
@@ -33,20 +21,14 @@ export const getPosts = () => {
     }
 }
 
-export const getUserPosts = user => {
-    return async (dispatch, getState) => {
-        try {
-            const response = await fetch(`http://localhost:8000/post/retrieve/${getState().user.auth._id}`);
-            const parsedResponse = await response.json();
-            console.log(parsedResponse.data);
-            if(parsedResponse.status.code === 200) {
-                dispatch({type: 'FILTERUSER', value: user});
-            }
-        } catch (error) {
-            console.log('error', error);
+export const getUserPosts = value => {
+    console.log(value);
+        return {
+            type: 'FILTERUSER', 
+            value
         }
-    }
 }
+
 
 export const makePost = value => {
     return async (dispatch, getState) => {
@@ -57,7 +39,6 @@ export const makePost = value => {
                 headers: {'Content-Type' : 'application/json'}
             });
             const parsedResponse = await response.json();
-            console.log(parsedResponse);
             if(parsedResponse.status.code === 200) {
                 dispatch({type: 'CREATE', value: parsedResponse.data});
             }
@@ -102,6 +83,7 @@ export const upvotePost = upvoted => {
             });
 
             const updatedPostResponseParsed = await postResponse.json();
+            console.log(updatedPostResponseParsed);
             const updatedPosts = getState().post.posts.map((post => {
                 if (post._id === updatedPostResponseParsed.data._id) {
                     post = updatedPostResponseParsed.data
@@ -109,6 +91,9 @@ export const upvotePost = upvoted => {
                 return post
             }));
             if(updatedPostResponseParsed.status.code === 200) {
+                console.log(getState().user.auth._id);
+                console.log(upvoted);
+                console.log(updatedPosts);
                 dispatch({type: 'READ', value: updatedPosts});
             }
         } catch (error) {
@@ -134,16 +119,8 @@ export const removePost = value => {
 } 
 
 export const findTaggedPosts = value => {
-    console.log(value);
-    return async (dispatch, getState) => {
-        try {
-            const response = await fetch(`http://localhost:8000/post/tags/${value}`);
-            const parsedResponse = await response.json();
-            if(parsedResponse.status.code === 200) {
-                dispatch({type: 'FILTER', value: value});
-            }
-        } catch (error) {
-            console.log('error', error);
-        }
+    return {
+        type: PostTypes.FILTER,
+        value
     }
-} 
+}

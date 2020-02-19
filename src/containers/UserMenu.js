@@ -1,17 +1,13 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {useDispatch, useSelector } from 'react-redux';
 import { Menu, Dropdown } from 'semantic-ui-react'
-import { getUserPosts } from '../redux/actions/post';
+import { getUserPosts, getPosts } from '../redux/actions/post';
 import '../styles/styles.css';
 
 const UserMenu = () => {
     const user = useSelector(state => state.user.auth);
     const loggedStatus = useSelector(state => state.user.loggedIn);
     const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch(getUserPosts());
-    }, [dispatch]);
 
     return (
         <Menu pointing secondary id="menu">
@@ -46,6 +42,7 @@ const UserMenu = () => {
                     <Menu.Item 
                     name='Home'
                     icon="home"
+                    onClick={() => dispatch(getPosts())}
                     />
                     
                     <Menu.Item

@@ -64,7 +64,6 @@ export const loginUser = value => {
 
 export const updateUser = value => {
     return async (dispatch, getState) => {
-        console.log(getState().user.auth.likedPosts);
         try {
             const response = await fetch(`http://localhost:8000/auth/add/${getState().user.auth._id}`, {
                 method: 'PATCH',
@@ -72,9 +71,27 @@ export const updateUser = value => {
                 headers: {'Content-Type' : 'application/json'}
             });
             const parsedResponse = await response.json();
-            console.log(parsedResponse.data);
             if(parsedResponse.status.code === 200) {
                 dispatch({type: 'LIKEPOST', value: parsedResponse.data});
+                console.log(getState().user.auth.likedPosts);
+            }
+        } catch (error) {
+            console.log('error', error);
+            
+        }
+    }
+}
+
+export const increment = () => {
+    return async (dispatch, getState) => {
+        try {
+            const response = await fetch(`http://localhost:8000/auth/count/${getState().user.auth._id}`, {
+                method: 'PATCH',
+            });
+            const parsedResponse = await response.json();
+            console.log(parsedResponse.data);
+            if(parsedResponse.status.code === 200) {
+                dispatch({type: 'INCREMENT', value: parsedResponse.data});
                 console.log(getState().user.auth.likedPosts);
             }
         } catch (error) {
@@ -93,7 +110,6 @@ export const followUser = value => {
                 headers: {'Content-Type' : 'application/json'}
             });
             const parsedResponse = await response.json();
-            console.log(parsedResponse.data);
             if(parsedResponse.status.code === 200) {
                 dispatch({type: 'FOLLOW', value: parsedResponse.data});
                 console.log(getState().user.auth.likedPosts);
