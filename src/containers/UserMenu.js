@@ -2,7 +2,7 @@ import React from 'react';
 import {useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Menu, Dropdown } from 'semantic-ui-react'
-import { getUserPosts, getPosts } from '../redux/actions/post';
+import { getPosts } from '../redux/actions/post';
 import '../styles/styles.css';
 
 const UserMenu = () => {
@@ -19,20 +19,20 @@ const UserMenu = () => {
     return (
         <Menu pointing secondary id="menu">
 
-            <Menu.Menu position="left">
+            <Menu.Menu position="left" id="branding-menu">
                 <Menu.Item 
                 name='Community Cards'
                 icon="copy"
                 id="branding"
                 />
-                
+
             </Menu.Menu>
-            
+
             <Menu.Menu position='right' id="user-menu">
 
-            
             {!loggedStatus ?
                 <>
+                    
                     <Menu.Item 
                     name='login'
                     onClick={() => 
