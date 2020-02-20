@@ -2,7 +2,7 @@ import React from 'react';
 import {useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Menu, Dropdown } from 'semantic-ui-react'
-import { getPosts } from '../redux/actions/post';
+import { getPosts, getUserPosts } from '../redux/actions/post';
 import '../styles/styles.css';
 
 const UserMenu = () => {
