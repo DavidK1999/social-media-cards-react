@@ -22,7 +22,7 @@ export const getPosts = () => {
 }
 
 export const getUserPosts = value => {
-    console.log(value);
+        console.log('Hi');
         return {
             type: 'FILTERUSER', 
             value

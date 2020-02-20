@@ -1,8 +1,6 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { getUsers } from '../redux/actions/user';
-
-import { Table, Header, Image, Icon } from 'semantic-ui-react';
+import React  from 'react';
+import { useSelector } from 'react-redux';
+import { Table, Icon } from 'semantic-ui-react';
 
 const FollowedUsers = () => {
     const user = useSelector(state => state.user.auth);

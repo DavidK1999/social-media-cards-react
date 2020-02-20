@@ -24,8 +24,8 @@ export default function Post(state=initialState, action) {
         case PostTypes.FILTER:
             return {...state, posts: state.posts.filter((post) => post.tags.includes(action.value))}
         
-            case PostTypes.FILTERUSER:
-            return {...state, posts: state.posts.filter((post) => post.user._id === action.value)}
+        case PostTypes.FILTERUSER:
+            return {...state, posts: state.posts.filter((post) => post.user._id === action.value || post.user.username === action.value)}
 
         case PostTypes.READ:
             return {...state, posts: state.posts = action.value,

@@ -13,7 +13,7 @@ const App = () =>  {
         <UserMenu />
         <AuthenticateUser />
         <HandlePosts />
-        <Route path="/" component={PostContainer}/>
+        <Route exact path= {["/",  "/all", "/tagged/:tag"]} component={PostContainer}/>
         <Route exact path="/following" component={FollowedUsers}/>
       </BrowserRouter>
   );

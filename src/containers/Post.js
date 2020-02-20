@@ -32,11 +32,11 @@ const Post = ({posts, user, loggedIn}) => {
                     <>
                         {user.followedUsers && user.followedUsers.includes(post.user.username)
                         ? 
-                        <Button icon labelPosition="left">
+                        <Button icon labelPosition="left" className="follow">
                             <Icon name="check"/> Following 
                         </Button>
                         :
-                        <Button icon labelPosition="left" onClick={() => follow(post.user)}>
+                        <Button icon labelPosition="left" onClick={() => follow(post.user)} className="follow">
                             <Icon name="user plus"/> Follow
                         </Button>
                         }
@@ -55,7 +55,7 @@ const Post = ({posts, user, loggedIn}) => {
                 {tags}
                 </Card.Content>
                 <Card.Content extra id="tags">
-                {user.likedPosts && user.likedPosts.includes(post._id) 
+                {user.likedPosts && user.likedPosts.includes(post._id)
                 ? 
                     <Button icon labelPosition='left'>
                         <Icon name='star' id="liked" />

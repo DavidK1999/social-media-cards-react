@@ -12,12 +12,12 @@ const UserMenu = () => {
     const history = useHistory();
 
     const goHome = () => {
-        history.push("/home");
+        history.push("/all");
         dispatch(getPosts());
     }
 
     return (
-        <Menu pointing secondary id="menu">
+        <Menu pointing secondary id="menu" stackable>
 
             <Menu.Menu position="left" id="branding-menu">
                 <Menu.Item 
@@ -47,8 +47,8 @@ const UserMenu = () => {
                 :
                 <>
                     <Menu.Item 
-                    name='Home'
-                    icon="home"
+                    name='All Posts'
+                    icon="globe"
                     onClick={() => goHome()}/>
                     
                     <Menu.Item

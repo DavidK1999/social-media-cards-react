@@ -9,6 +9,7 @@ const useForm = () => {
     const [inputs, setInputs] = useState({});
     const dispatch = useDispatch();
     const message = useSelector(state => state.user.message);
+    const loggedIn = useSelector(state => state.user.loggedIn);
     const history = useHistory();
     
     const register = async e => {              
@@ -17,7 +18,11 @@ const useForm = () => {
     }
 
     const follow = user => {
+        if(loggedIn){
         dispatch(followUser(user));
+        } else {
+            alert('You must be logged in to follow other users');
+        }
     }
     
     const login = e => {
@@ -46,12 +51,16 @@ const useForm = () => {
     }
 
     const likePost = post => {
+        if(loggedIn) {
         dispatch(upvotePost(post));
         dispatch(updateUser(post));
+        } else {
+            alert('You must login to like posts');
+        }
     }
 
     const findTagged = tag => {
-        history.replace(`/home/${tag}`);
+        history.push(`/tagged/${tag}`);
         dispatch(findTaggedPosts(tag));
     }
 
