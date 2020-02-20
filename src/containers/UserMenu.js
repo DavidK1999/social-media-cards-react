@@ -11,6 +11,11 @@ const UserMenu = () => {
     const dispatch = useDispatch();
     const history = useHistory();
 
+    const goHome = () => {
+        history.push("/home");
+        dispatch(getPosts());
+    }
+
     return (
         <Menu pointing secondary id="menu">
 
@@ -44,7 +49,7 @@ const UserMenu = () => {
                     <Menu.Item 
                     name='Home'
                     icon="home"
-                    onClick={() => history.push("/home")}/>
+                    onClick={() => goHome()}/>
                     
                     <Menu.Item
                     icon="book"
